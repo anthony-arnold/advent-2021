@@ -1,6 +1,5 @@
 module Main where
 import Control.Exception
-import Data.Array.IO
 
 -- Split a string
 split :: Char -> String -> [String]
