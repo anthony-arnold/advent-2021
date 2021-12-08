@@ -24,10 +24,9 @@ foldFish start (mem, tot) val = (updated, total)
         (f, updated) = fish (start - val) mem
 
 ans :: Int -> [Int] -> Int
-ans t x = desc + prog
+ans t x = total
   where
-    (_, desc) = foldl (foldFish t) (mem, 0) x
-    prog = length x
+    (_, total) = foldl (foldFish t) (mem, length x) x
     mem =  Map.empty :: Map.Map Int Int
 
 main = do
