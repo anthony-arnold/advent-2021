@@ -22,13 +22,11 @@ unique m (clue:clues)
   | otherwise = unique m clues
   where n = length clue
 
-allpairs :: [a] -> [a] -> [(a, a)]
 allpairs [] _ = []
 allpairs _ [] = []
 allpairs (l1:l1s) (l2:l2s) = (l1, l2) : rest
   where rest = (allpairs [l1] l2s) ++ (allpairs l1s (l2:l2s))
 
-subset :: String -> String -> Bool
 subset sub sup = all (\l -> elem l sup) sub
 
 zero m clues = Map.insert czero 0 m
@@ -39,7 +37,6 @@ two m clues = Map.insert ctwo 2 m
   where ctwo = head $ filter(\c -> Map.notMember c m) nfive
         nfive = filter(\c -> length c == 5) clues
 
-fivesix :: Map.Map String Int -> [String] -> Map.Map String Int
 fivesix m clues = Map.insert csix 6 (Map.insert cfive 5 m)
   where (cfive, csix) = head $ filter(\(f, s) -> subset f s) nfivesix
         nfivesix = allpairs nfive nsix
@@ -52,7 +49,6 @@ three m clues = Map.insert cthree 3 m
         cone = head $ filter(\c -> length c == 2) clues
         nfive = filter(\c -> length c == 5) clues
 
-nine :: Map.Map String Int -> [String] -> Map.Map String Int
 nine m clues = Map.insert cnine 9 m
   where cnine = head $ filter (\c -> subset cfour c) nsix
         cfour = head $ filter (\c -> length c == 4) clues
