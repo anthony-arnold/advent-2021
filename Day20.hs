@@ -45,18 +45,6 @@ enhancements algo img times dflts bnds = enhanced
         dflt = head dflts
         ex = expand bnds
 
-writeLn y img xbound = do
-  let s = [bool '.' '#' $ Map.findWithDefault False (x, y) img | x <- xbound]
-  print s
-
-writeLns _ [] _ = return ()
-writeLns img (y:ys) xbound  = do
-  writeLn y img xbound
-  writeLns img ys xbound
-
-write img bounds = do
-  writeLns img bounds bounds
-
 answer algo img times = sum $ map (bool 0 1) $ Map.elems $ enhanced
   where zero = algo!0
         enhanced = enhancements algo img times [False, zero] (ranges $ Map.keys img)
