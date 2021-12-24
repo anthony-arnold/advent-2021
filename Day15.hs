@@ -38,10 +38,11 @@ mag grid w h (x, y) = pol
         (dx, x') = divMod x w
         (dy, y') = divMod y h
 
-answer grid m = case shortest next (w*m-1, h*m-1) (0, (0, 0)) of
+answer grid m = case shortest next done (0, (0, 0)) of
                   Nothing -> maxBound :: Int
                   Just (len, _) -> len
   where
+    done v = v == (w*m-1, h*m-1)
     next (dist, p) = map (\n -> (dist + xp n, n)) (adj (w*m) (h*m) p)
     xp n = mag grid w h n
     ((_, _), (w, h)) = bounds grid
